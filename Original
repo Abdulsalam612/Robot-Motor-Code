@@ -44,24 +44,77 @@ void controlMotors() {
   int ry = PS4.RStickY();
   int rx = PS4.RStickX();
 
-  if (PS4.Triangle()) {
-    changeMotorSpeed(90, 39, -10);
-  }
-  if (PS4.Circle()) {
-    changeMotorSpeed(90, 131, 10);
-  }
+  void controlMotors() {
+  int lx = PS4.LStickX();
+  int ly = PS4.LStickY();
+  int ry = PS4.RStickY();
+  int rx = PS4.RStickX();
 
-  // Steering logic using the right stick
-  if (rx > 70) {
+  // Move Forwards and Backwards
+  if (ly > 70) {
+    // Forward movement
+    if (rx > 70) {
+      // Forward and right rotation
+      motor1.write(50);
+      motor2.write(130);
+      motor3.write(130);
+      motor4.write(130);
+    } else if (rx < -70) {
+      // Forward and left rotation
+      motor1.write(130);
+      motor2.write(130);
+      motor3.write(50);
+      motor4.write(130);
+    } else {
+      // Pure forward movement
+      motor1.write(130);
+      motor2.write(130);
+      motor3.write(130);
+      motor4.write(130);
+    }
+  } else if (ly < -70) {
+    // Backward movement
+    if (rx > 70) {
+      // Backward and right rotation
+      motor1.write(50);
+      motor2.write(50);
+      motor3.write(50);
+      motor4.write(130);
+    } else if (rx < -70) {
+      // Backward and left rotation
+      motor1.write(50);
+      motor2.write(50);
+      motor3.write(130);
+      motor4.write(50);
+    } else {
+      // Pure backward movement
+      motor1.write(50);
+      motor2.write(50);
+      motor3.write(50);
+      motor4.write(50);
+    }
+  } else if (lx > 70) {
     // Steer right
     motor1.write(130);
-    motor2.write(50);
-    motor3.write(130);
+    motor2.write(130);
+    motor3.write(50);
     motor4.write(50);
-  } else if (rx < -70) {
+  } else if (lx < -70) {
     // Steer left
     motor1.write(50);
+    motor2.write(50);
+    motor3.write(130);
+    motor4.write(130);
+  } else if (rx > 70) {
+    // Right rotation
+    motor1.write(50);
     motor2.write(130);
+    motor3.write(90);
+    motor4.write(90);
+  } else if (rx < -70) {
+    // Left rotation
+    motor1.write(90);
+    motor2.write(90);
     motor3.write(50);
     motor4.write(130);
   } else {
@@ -71,18 +124,8 @@ void controlMotors() {
     motor3.write(90);
     motor4.write(90);
   }
-
-  // More control logic here...
 }
 
-void changeMotorSpeed(int start, int end, int step) {
-  for (int i = start; i != end; i += step) {
-    motor1.write(i);
-    motor2.write(i);
-    motor3.write(i);
-    motor4.write(i);
-    delay(20);
-  }
 }
 
 void dance() {
