@@ -154,6 +154,8 @@ void controlMotors() {
     motor3.write(backward);
     motor4.write(backward);
     delay(movementDelay);
+    }else if(PS4.Cross()){    
+    dance();
   } else {
     // Center the wheels
     motor1.write(stop);
@@ -165,7 +167,68 @@ void controlMotors() {
 
 
 
-void dance() {
+void dance() {  
   // Dance moves for the car
   // Add the dance moves logic here...
+  motor1.write(50);
+     delay(20);
+     motor2.write(130);
+     delay(20);
+     motor3.write(130);
+     delay(20);
+     motor4.write(50);     
+     delay(1000);
+
+     motor1.write(130);
+     delay(20);
+     motor2.write(50);
+     delay(20);
+     motor3.write(50);
+     delay(20);
+     motor4.write(130);     
+     delay(1000);
+
+     motor1.write(130);
+     delay(20);
+     motor2.write(130);
+     delay(1000);
+
+     motor1.write(50);
+     delay(20);
+     motor2.write(50);
+     delay(1000);
+     
+     motor1.write(130);
+     delay(20);
+     motor2.write(130);
+     delay(20);
+     motor3.write(50);
+     delay(20);
+     motor4.write(50);     
+     delay(1000);
+
+     motor3.write(130);
+     delay(20);
+     motor4.write(130);     
+     delay(1000); 
+
+     motor3.write(50);
+     delay(20);
+     motor4.write(50);     
+     delay(1000); 
+
+     motor1.write(50);
+     delay(20);
+     motor2.write(130);
+     delay(20);
+     motor3.write(130);
+     delay(20);
+     motor4.write(50);     
+     delay(3000);
+     motor1.write(90);
+     motor2.write(90);
+     motor3.write(90);
+     motor4.write(90);
+     delay(300);
+     
 }
