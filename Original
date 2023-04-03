@@ -107,7 +107,7 @@ void controlMotors() {
     delay(movementDelay);
   } else if (lx < -70) {
     // Steer left
-    motor1.write(foward);
+    motor1.write(forward);
     motor2.write(forward);
     motor3.write(backward);
     motor4.write(backward);
@@ -125,6 +125,34 @@ void controlMotors() {
     motor2.write(stop);
     motor3.write(backward);
     motor4.write(forward);
+    delay(movementDelay);
+   } else if (lx > 70 && ly > 70) {
+    // Forward-Right Diagonal Movement
+    motor1.write(stop);
+    motor2.write(stop);
+    motor3.write(forward);
+    motor4.write(forward);
+    delay(movementDelay);
+  } else if (lx < -70 && ly > 70) {
+    // Forward-Left Diagonal Movement
+    motor1.write(forward);
+    motor2.write(forward);
+    motor3.write(stop);
+    motor4.write(stop);
+    delay(movementDelay);
+    } else if (lx > 70 && ly < -70) {
+    // Backward-right Diagonal Movement
+    motor1.write(backward);
+    motor2.write(backward);
+    motor3.write(stop);
+    motor4.write(stop);
+    delay(movementDelay);
+  } else if (lx < -70 && ly < -70) {
+    // Backward-Left Diagonal Movement
+    motor1.write(stop);
+    motor2.write(stop);
+    motor3.write(backward);
+    motor4.write(backward);
     delay(movementDelay);
   } else {
     // Center the wheels
