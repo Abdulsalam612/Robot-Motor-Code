@@ -12,9 +12,12 @@ const int in3 = 27;
 const int in4 = 26;
 
 // Define the speed variables
-const int forward = 130;
-const int backward = 50;
+const int forward = 125;
+const int backward = 55;
 const int stop = 90;
+
+// Define the delay between each movement
+const unsigned long movementDelay = 100;
 
 void setup() {
   Serial.begin(115200);
@@ -72,6 +75,7 @@ void controlMotors() {
       motor3.write(forward);
       motor4.write(forward);
     }
+    delay(movementDelay);
   } else if (ly < -70) {
     // Backward movement
     if (rx > 70) {
@@ -93,30 +97,35 @@ void controlMotors() {
       motor3.write(backward);
       motor4.write(backward);
     }
+    delay(movementDelay);
   } else if (lx > 70) {
     // Steer right
-    motor1.write(forward);
-    motor2.write(forward);
-    motor3.write(backward);
-    motor4.write(backward);
-  } else if (lx < -70) {
-    // Steer left
     motor1.write(backward);
     motor2.write(backward);
     motor3.write(forward);
     motor4.write(forward);
+    delay(movementDelay);
+  } else if (lx < -70) {
+    // Steer left
+    motor1.write(foward);
+    motor2.write(forward);
+    motor3.write(backward);
+    motor4.write(backward);
+    delay(movementDelay);
   } else if (rx > 70) {
     // Right rotation
     motor1.write(backward);
     motor2.write(forward);
     motor3.write(stop);
     motor4.write(stop);
+    delay(movementDelay);
   } else if (rx < -70) {
     // Left rotation
     motor1.write(stop);
     motor2.write(stop);
     motor3.write(backward);
     motor4.write(forward);
+    delay(movementDelay);
   } else {
     // Center the wheels
     motor1.write(stop);
