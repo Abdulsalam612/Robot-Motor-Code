@@ -11,9 +11,14 @@ const int in2 = 14;
 const int in3 = 27;
 const int in4 = 26;
 
+// Define the speed variables
+const int forward = 130;
+const int backward = 50;
+const int stop = 90;
+
 void setup() {
   Serial.begin(115200);
-  PS4.begin("3C:22:FB:52:B2:4A");
+  PS4.begin("E8:61:7E:6B:93:30");
 
   attachMotors();
   initializeMotors();
@@ -31,10 +36,10 @@ void attachMotors() {
 }
 
 void initializeMotors() {
-  motor1.write(90);
-  motor2.write(90);
-  motor3.write(90);
-  motor4.write(90);
+  motor1.write(stop);
+  motor2.write(stop);
+  motor3.write(stop);
+  motor4.write(stop);
   delay(5000);
 }
 
@@ -44,89 +49,84 @@ void controlMotors() {
   int ry = PS4.RStickY();
   int rx = PS4.RStickX();
 
-  void controlMotors() {
-  int lx = PS4.LStickX();
-  int ly = PS4.LStickY();
-  int ry = PS4.RStickY();
-  int rx = PS4.RStickX();
 
   // Move Forwards and Backwards
   if (ly > 70) {
     // Forward movement
     if (rx > 70) {
       // Forward and right rotation
-      motor1.write(50);
-      motor2.write(130);
-      motor3.write(130);
-      motor4.write(130);
+      motor1.write(backward);
+      motor2.write(forward);
+      motor3.write(forward);
+      motor4.write(forward);
     } else if (rx < -70) {
       // Forward and left rotation
-      motor1.write(130);
-      motor2.write(130);
-      motor3.write(50);
-      motor4.write(130);
+      motor1.write(forward);
+      motor2.write(forward);
+      motor3.write(backward);
+      motor4.write(forward);
     } else {
       // Pure forward movement
-      motor1.write(130);
-      motor2.write(130);
-      motor3.write(130);
-      motor4.write(130);
+      motor1.write(forward);
+      motor2.write(forward);
+      motor3.write(forward);
+      motor4.write(forward);
     }
   } else if (ly < -70) {
     // Backward movement
     if (rx > 70) {
       // Backward and right rotation
-      motor1.write(50);
-      motor2.write(50);
-      motor3.write(50);
-      motor4.write(130);
+      motor1.write(backward);
+      motor2.write(backward);
+      motor3.write(backward);
+      motor4.write(forward);
     } else if (rx < -70) {
       // Backward and left rotation
-      motor1.write(50);
-      motor2.write(50);
-      motor3.write(130);
-      motor4.write(50);
+      motor1.write(backward);
+      motor2.write(backward);
+      motor3.write(forward);
+      motor4.write(backward);
     } else {
       // Pure backward movement
-      motor1.write(50);
-      motor2.write(50);
-      motor3.write(50);
-      motor4.write(50);
+      motor1.write(backward);
+      motor2.write(backward);
+      motor3.write(backward);
+      motor4.write(backward);
     }
   } else if (lx > 70) {
     // Steer right
-    motor1.write(130);
-    motor2.write(130);
-    motor3.write(50);
-    motor4.write(50);
+    motor1.write(forward);
+    motor2.write(forward);
+    motor3.write(backward);
+    motor4.write(backward);
   } else if (lx < -70) {
     // Steer left
-    motor1.write(50);
-    motor2.write(50);
-    motor3.write(130);
-    motor4.write(130);
+    motor1.write(backward);
+    motor2.write(backward);
+    motor3.write(forward);
+    motor4.write(forward);
   } else if (rx > 70) {
     // Right rotation
-    motor1.write(50);
-    motor2.write(130);
-    motor3.write(90);
-    motor4.write(90);
+    motor1.write(backward);
+    motor2.write(forward);
+    motor3.write(stop);
+    motor4.write(stop);
   } else if (rx < -70) {
     // Left rotation
-    motor1.write(90);
-    motor2.write(90);
-    motor3.write(50);
-    motor4.write(130);
+    motor1.write(stop);
+    motor2.write(stop);
+    motor3.write(backward);
+    motor4.write(forward);
   } else {
     // Center the wheels
-    motor1.write(90);
-    motor2.write(90);
-    motor3.write(90);
-    motor4.write(90);
+    motor1.write(stop);
+    motor2.write(stop);
+    motor3.write(stop);
+    motor4.write(stop);
   }
 }
 
-}
+
 
 void dance() {
   // Dance moves for the car
